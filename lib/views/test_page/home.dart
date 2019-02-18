@@ -19,7 +19,7 @@ class _TestPageState extends State<TestPage> {
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new Scaffold(
           appBar: new AppBar(
-              title: new Text('TestPage')
+              title: new Text('MyTestPage')
           ),
           body: new RaisedButton(
               child: new Text('${store.state.test.login}'),
