@@ -21,9 +21,6 @@ class _IndexHomeState extends State<IndexHome> {
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new MaterialApp(
         home: new Scaffold(
-          appBar: new AppBar(
-            title: new Text('图书馆'),
-          ),
           body: store?.state?.index?.children[store?.state?.index?.currentIndex],
           bottomNavigationBar: new BottomNavigationBar(
               onTap: (index) {

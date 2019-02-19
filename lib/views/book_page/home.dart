@@ -33,9 +33,26 @@ class _BookPageState extends State<BookPage> {
     // TODO: implement build
 
     return new StoreBuilder<WMState>(builder: (context, store) {
-      return new Scaffold(
+      return new RefreshIndicator(
+        color: Colors.amberAccent,
+        child: new Scaffold(
+          appBar: new AppBar(
+            title: new Text('书籍管理'),
+          ),
           body: listView()
+        ),
+        onRefresh: _loadRefresh
       );
+    });
+  }
+
+  Future<Null> _loadRefresh() async{
+    print('12345678');
+    await Future.delayed(Duration(seconds: 3), () {
+      print('refresh');
+//      setState(() {
+//        list = List.generate(20, (i) => '哈喽,我是新刷新的 $i');
+//      });
     });
   }
 
