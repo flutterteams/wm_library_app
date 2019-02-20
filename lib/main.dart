@@ -7,6 +7,7 @@ import 'package:wm_library_app/reducers/reducers.dart';
 
 import 'package:wm_library_app/model/test.dart';
 import 'package:wm_library_app/model/index.dart';
+import 'package:wm_library_app/model/book.dart';
 
 import 'package:wm_library_app/views/test_page/home.dart';
 import 'package:wm_library_app/views/index/home.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       test: Test.empty(),
       index: new Index(0),
       bookList: new List(),
-      bookTypeList: new List()
+      bookTypeList: new List(),
+      book: Book.empty()
     ),
   );
 

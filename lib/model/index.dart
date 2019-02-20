@@ -7,9 +7,6 @@ class Index {
 
   List children = [
     new BookPage(),
-    new BookPage(),
-    new BookPage(),
-    new BookPage()
   ];
 
 }
