@@ -19,12 +19,29 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
+  ScrollController _scrollController = ScrollController(); //listview的控制器
+  int _pageNo = 1;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('滑动到了最底部');
+        BookDao.getList(_getStore(), page: _pageNo);
+        _pageNo++;
+      }
+    });
+  }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    BookDao.getList(_getStore());
+    BookDao.getList(_getStore(), page: _pageNo);
+    _pageNo++;
     BookTypeDao.getTypeList(_getStore());
   }
 
@@ -37,22 +54,18 @@ class _BookPageState extends State<BookPage> {
     // TODO: implement build
 
     return new StoreBuilder<WMState>(builder: (context, store) {
-      return new RefreshIndicator(
-        color: Colors.amberAccent,
-        child: new Scaffold(
-          appBar: new AppBar(
-            title: new Text('书籍管理'),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add, size: 30, color: Colors.white),
-                iconSize: 40,
-                onPressed: add,
-              ),
-            ],
-          ),
-          body: listView()
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('书籍管理'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add, size: 30, color: Colors.white),
+              iconSize: 40,
+              onPressed: add,
+            ),
+          ],
         ),
-        onRefresh: _loadRefresh
+        body: listView()
       );
     });
   }
@@ -173,8 +186,13 @@ class _BookPageState extends State<BookPage> {
       tiles: tiles,
     ).toList();
 
-    return new ListView(
-      children: divided,
+    return new RefreshIndicator(
+        child: new ListView.builder(
+          itemBuilder: (context, index) => divided[index],
+          itemCount: list.length,
+          controller: _scrollController,
+        ),
+        onRefresh: _loadRefresh
     );
   }
 }

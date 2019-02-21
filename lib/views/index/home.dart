@@ -35,7 +35,7 @@ class _IndexHomeState extends State<IndexHome> {
               new BottomNavigationBarItem(icon: new Icon(Icons.book), title: new Text('书籍')),
               new BottomNavigationBarItem(icon: new Icon(Icons.event_note), title: new Text('借阅')),
               new BottomNavigationBarItem(icon: new Icon(Icons.people), title: new Text('人员')),
-              new BottomNavigationBarItem(icon: new Icon(Icons.settings), title: new Text('设置'))
+//              new BottomNavigationBarItem(icon: new Icon(Icons.settings), title: new Text('设置'))
             ]
         ),
       );

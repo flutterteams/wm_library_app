@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
       index: new Index(0),
       bookList: new List(),
       bookTypeList: new List(),
-      book: Book.empty()
+      book: Book.empty(),
+      borrowList: new List()
     ),
   );
 
