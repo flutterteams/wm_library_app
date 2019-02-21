@@ -1,17 +1,21 @@
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/model/book_type.dart';
 
-final BookTypeReducer = combineReducers<List<BookType>>([
-  TypedReducer<List<BookType>, GetBookTypeAction>(_get),
+final BookTypeReducer = combineReducers<Map>([
+  TypedReducer<Map, GetBookTypeAction>(_get),
 ]);
 
-List<BookType> _get(List<BookType> list, action) {
-  list.clear();
+Map _get(Map map, action) {
+
   if (action.list == null) {
-    return list;
+    return map;
   } else {
-    list.addAll(action.list);
-    return list;
+    Map typeMap = new Map();
+
+    for(int i = 0; i < action.list.length; i++){
+      typeMap[action.list[i].id] = action.list[i].name;
+    }
+    return typeMap;
   }
 }
 

@@ -35,15 +35,26 @@ class _TypeListPageState extends State<TypeListPage> {
   }
 
   Widget RadioGroup() {
-    List typeList = _getStore().state.bookTypeList;
+    Map typeMap = _getStore().state.bookTypeMap;
 
-    var radio = typeList.map((i) {
-      return new RadioListTile(
-          value: i.id,
-          title: Text(i.name),
+//    var radio = typeList.map((i) {
+//      return new RadioListTile(
+//          value: i.id,
+//          title: Text(i.name),
+//          groupValue: _getStore().state.book.type_id,
+//          onChanged: (value) => goBack(value)
+//      );
+//    });
+
+    List<Widget> radio = new List();
+
+    typeMap.forEach((k, v) {
+      radio.add(new RadioListTile(
+          value: k,
+          title: Text(v),
           groupValue: _getStore().state.book.type_id,
           onChanged: (value) => goBack(value)
-      );
+      ));
     });
 
     // 添加每个线

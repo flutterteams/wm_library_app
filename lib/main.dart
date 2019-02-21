@@ -25,8 +25,10 @@ class MyApp extends StatelessWidget {
     initialState: new WMState(
       test: Test.empty(),
       index: new Index(0),
-      bookList: new List(),
-      bookTypeList: new List(),
+      bookMap: {
+        'page': 0,
+      },
+      bookTypeMap: new Map(),
       book: Book.empty(),
       borrowList: new List()
     ),

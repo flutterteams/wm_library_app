@@ -16,13 +16,11 @@ Book _changeAll(Book book, action) {
 }
 
 Book _changeType(Book book, action) {
-  print(book.title);
   book = new Book(book.id, book.title, book.author, action.id, book.create_time, book.content);
   return book;
 }
 
 Book _changeName(Book book, action) {
-  print(action.name);
   book = new Book(book.id, action.name == '' ? null : action.name, book.author, book.type_id, book.create_time, book.content);
   return book;
 }

@@ -20,7 +20,6 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
-  int _pageNo = 1;
 
   @override
   void initState() {
@@ -30,8 +29,7 @@ class _BookPageState extends State<BookPage> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         print('滑动到了最底部');
-        BookDao.getList(_getStore(), page: _pageNo);
-        _pageNo++;
+        BookDao.getList(_getStore(), page: ++_getStore().state.bookMap['page']);
       }
     });
   }
@@ -40,9 +38,11 @@ class _BookPageState extends State<BookPage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    BookDao.getList(_getStore(), page: _pageNo);
-    _pageNo++;
-    BookTypeDao.getTypeList(_getStore());
+    print('执行');
+    if (_getStore().state.bookMap['page'] == 0) {
+      BookDao.getList(_getStore());
+      BookTypeDao.getTypeList(_getStore());
+    }
   }
 
   Store<WMState> _getStore() {
@@ -85,25 +85,13 @@ class _BookPageState extends State<BookPage> {
   }
 
   Future<Null> _loadRefresh() async{
-    print('12345678');
-    await Future.delayed(Duration(seconds: 3), () {
-      print('refresh');
-//      setState(() {
-//        list = List.generate(20, (i) => '哈喽,我是新刷新的 $i');
-//      });
-    });
+    await BookDao.getList(_getStore());
   }
 
   Widget listView() {
 
-    var list = _getStore().state.bookList;
-    List typeList = _getStore().state.bookTypeList;
-
-    Map typeMap = new Map();
-
-    for(int i = 0; i < typeList.length; i++){
-      typeMap[typeList[i].id] = typeList[i].name;
-    }
+    List<Book> list = _getStore().state.bookMap.containsKey('list') ? _getStore().state.bookMap['list'] : new List();
+    Map typeMap = _getStore().state.bookTypeMap;
 
     final tiles = list.map((i) {
       return new GestureDetector(

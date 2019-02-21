@@ -23,10 +23,8 @@ class _IndexHomeState extends State<IndexHome> {
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new Scaffold(
         body: store?.state?.index?.children[store?.state?.index?.currentIndex],
-//          body: new BookPage(context),
         bottomNavigationBar: new BottomNavigationBar(
             onTap: (index) {
-              print(index);
               store.dispatch(new IndexAction(new Index(index)));
             },
             currentIndex: store?.state?.index?.currentIndex,

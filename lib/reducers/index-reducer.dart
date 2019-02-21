@@ -6,7 +6,6 @@ final IndexReducer = combineReducers<Index>([
 ]);
 
 Index _changeIndex(Index index, action) {
-  print(action.index);
   index = action.index;
   return index;
 }

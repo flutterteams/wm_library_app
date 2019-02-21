@@ -32,7 +32,13 @@ class BookDao {
               time,
               response.data['data'][i]['content']));
         }
-        store.dispatch(new GetBookAction(list));
+        store.dispatch(new GetBookAction({'page': page}));
+        if (page == 1){
+          store.dispatch(new GetBookListAction(list));
+        } else {
+          store.dispatch(new GetBookAddListAction(list));
+        }
+
       }
     } catch (e) {
       return print(e);
@@ -92,7 +98,7 @@ class BookDao {
     try {
       Response response;
       Dio dio = new Dio();
-      List bookList = store.state.bookList;
+      List bookList = store.state.bookMap.containsKey('list') ? store.state.bookMap['list'] : [];
 
       response = await dio.post(
           "http://localhost:3000/api/admin/offlineBook",
@@ -108,7 +114,7 @@ class BookDao {
             bookList.removeAt(i);
           }
         }
-        store.dispatch(new GetBookAction(bookList));
+        store.dispatch(new GetBookListAction(bookList));
       }
     } catch (e) {
       return print(e);

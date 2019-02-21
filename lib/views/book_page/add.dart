@@ -3,10 +3,10 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:wm_library_app/dao/book.dart';
-import 'package:wm_library_app/dao/book_type.dart';
-import 'package:intl/intl.dart';
+
 
 import 'package:wm_library_app/reducers/add-book-reducer.dart';
+import 'package:wm_library_app/reducers/book-reducer.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -26,13 +26,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    List typeList = _getStore().state.bookTypeList;
-
-    Map typeMap = new Map();
-
-    for(int i = 0; i < typeList.length; i++){
-      typeMap[typeList[i].id] = typeList[i].name;
-    }
+    Map typeMap = _getStore().state.bookTypeMap;
 
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new Scaffold(
@@ -248,6 +242,7 @@ class _AddBookPageState extends State<AddBookPage> {
     }
 
     if (result['code'] == 1) {
+      _getStore().dispatch(new GetBookAction({'page': 0}));
       Navigator.pop(context);
     } else {
       showDialog(
