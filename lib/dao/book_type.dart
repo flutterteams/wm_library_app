@@ -4,6 +4,7 @@ import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_library_app/reducers/book-type-reducer.dart';
 import 'package:wm_library_app/model/book_type.dart';
+import 'package:wm_library_app/config/config.dart';
 
 class BookTypeDao {
 
@@ -12,7 +13,7 @@ class BookTypeDao {
       Response response;
       Dio dio = new Dio();
 
-      response = await Dio().get("http://localhost:3000/api/bookType");
+      response = await Dio().get(Config.BASE_URL + "/api/bookType");
       print(response.data);
       if (response.data['code'] == 1) {
         List<BookType> list = new List();

@@ -248,8 +248,22 @@ class _AddBookPageState extends State<AddBookPage> {
       showDialog(
         context: context,
         builder: (context) {
-          return new CupertinoAlertDialog(
-            title: new Text('保存失败'),
+          return Center(
+            child: new Container(
+              width: 100.0,
+              height: 50.0,
+              color: Colors.black45,
+              child: new Center(
+                child: new Text(
+                  '保存失败',
+                  style: new TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.white,
+                    decoration: TextDecoration.none
+                  ),
+                ),
+              ),
+            ),
           );
         }
       );

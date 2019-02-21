@@ -4,6 +4,7 @@ import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_library_app/reducers/borrow-reducer.dart';
 import 'package:wm_library_app/model/borrow.dart';
+import 'package:wm_library_app/config/config.dart';
 
 class BorrowDao {
   static getList(Store<WMState> store, {page = 1, pageSize = 10}) async {
@@ -11,7 +12,7 @@ class BorrowDao {
       Response response;
       Dio dio = new Dio();
 
-      response = await Dio().get("http://localhost:3000/api/admin/getBorrowBookList", queryParameters: {"page_no": page.toString(), "page_size": pageSize.toString()});
+      response = await Dio().get(Config.BASE_URL + "/api/admin/getBorrowBookList", queryParameters: {"page_no": page.toString(), "page_size": pageSize.toString()});
 
       print(response.data);
       if (response.data['code'] == 1) {

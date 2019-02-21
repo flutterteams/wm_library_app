@@ -4,6 +4,7 @@ import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_library_app/reducers/book-reducer.dart';
 import 'package:wm_library_app/model/book.dart';
+import 'package:wm_library_app/config/config.dart';
 
 class BookDao {
   static getList(Store<WMState> store, {page = 1, pageSize = 10}) async {
@@ -11,7 +12,7 @@ class BookDao {
       Response response;
       Dio dio = new Dio();
 
-      response = await Dio().get("http://localhost:3000/api/bookList", queryParameters: {"pageNo": page.toString(), "pageSize": pageSize.toString(), "bookStatus" : '0'});
+      response = await Dio().get(Config.BASE_URL + "/api/bookList", queryParameters: {"pageNo": page.toString(), "pageSize": pageSize.toString(), "bookStatus" : '0'});
 //      responseGet = await dio.get("/test?id=12&name=wendu");
 //      responseGet = await dio.get("/test", queryParameters: {"id": '12', "name": "wendu"});
 //      responsePost = await dio.post("http://localhost:3000/api/user/login", data: {"email": 'shimuhui@frogshealth.com', "password": "123456"});
@@ -51,8 +52,7 @@ class BookDao {
       Dio dio = new Dio();
 
       Book book = store.state.book;
-      response = await dio.post(
-        "http://localhost:3000/api/admin/addbook",
+      response = await dio.post(Config.BASE_URL + "/api/admin/addbook",
         data: {
           "type": book.type_id,
           "title": book.title,
@@ -76,7 +76,7 @@ class BookDao {
 
       Book book = store.state.book;
       response = await dio.post(
-          "http://localhost:3000/api/admin/bookDetails",
+          Config.BASE_URL + "/api/admin/bookDetails",
           data: {
             "bookId": book.id,
             "typeId": book.type_id,
@@ -101,7 +101,7 @@ class BookDao {
       List bookList = store.state.bookMap.containsKey('list') ? store.state.bookMap['list'] : [];
 
       response = await dio.post(
-          "http://localhost:3000/api/admin/offlineBook",
+          Config.BASE_URL + "/api/admin/offlineBook",
           data: {
             "bookId": id,
           }
