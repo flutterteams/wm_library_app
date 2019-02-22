@@ -23,6 +23,9 @@ dependencies:
   flutter_redux: ^0.5.2
   dio: 2.0.1
   intl: ^0.15.7
+  # 文件路径访问
+  path_provider: ^0.4.0
+  shared_preferences: ^0.4.2
 
 dev_dependencies:
   flutter_test:

@@ -4,10 +4,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/dao/login.dart';
 import 'package:wm_library_app/model/login_user.dart';
-
 import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:wm_library_app/views/index/home.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -24,39 +23,40 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _userNameController = new TextEditingController();
   TextEditingController _pwdcontroller = new TextEditingController();
 
+  List<LoginUser> list;
+  SharedPreferences sharedPreferences;
+
   Store<WMState> _getStore() {
     return StoreProvider.of(context);
   }
 
-  toLogin(String email,String password){
+  toLogin(String email,String password) async{
     print("====="+email+"====="+password);
 
-    LoginDao.get(_getStore(), email,password);
+    await LoginDao.get(_getStore(), email,password);
 
-    var loginList = _getStore().state.loginUser;
+    List loginList = await _getStore().state.loginUser;
 
+    print("====loginList==="+loginList.length.toString());
 
+    if(loginList.isNotEmpty && loginList.length > 0){
+      //数据保存到本地
+      sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString("name", loginList[0].name);
+      sharedPreferences.setString("token", loginList[0].token);
 
-    Navigator.push(context,new MaterialPageRoute(builder: (context){
+      print({'name':sharedPreferences.get("name")});
+      print({'token':sharedPreferences.get("token")});
 
-      return new IndexHome();
-
-    }));
-
-//    _getStore().state.loginUser.map((value){
-//      print(value.name+"++++++++++++++++++++");
-//      if(value.token.isNotEmpty){
-//        Navigator.push(context,new MaterialPageRoute(builder: (context){
-//          return new IndexHome();
-//        }));
-//      }else{
-//        showDialog(context: context, builder: (context) => AlertDialog(
-//          title: Text("数据异常！",),
-//        )
-//        );
-//      }
-//    });
-
+      Navigator.push(context,new MaterialPageRoute(builder: (context){
+        return new IndexHome();
+      }));
+    }
+    else{
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("数据异常！",),)
+      );
+    }
   }
 
   void toCheakData(String userName, String userPwd) {
@@ -114,7 +114,9 @@ class _LoginPageState extends State<LoginPage> {
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: new InputDecoration(
 
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+//                                  contentPadding: EdgeInsets.all(8.0),
+//                                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                                  contentPadding: const EdgeInsets.fromLTRB(6.0,10.0,0.0,10.0),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   ),
@@ -156,7 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                           child: new TextField(
                             controller: _pwdcontroller,
                             decoration: new InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                              contentPadding: const EdgeInsets.fromLTRB(6.0,10.0,0.0,10.0),
+                              //contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
                               ),

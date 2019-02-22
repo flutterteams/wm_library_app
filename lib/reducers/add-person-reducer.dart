@@ -21,14 +21,14 @@ Person _changePerson(Person person, action) {
 }
 
 Person _changeEmail(Person person, action) {
-  print("====actionname===="+action.name);
-  person = new Person(person.name, person.email == '' ? null : action.name, person.phone, person.status, person.id);
+  print("====actionname===="+action.email);
+  person = new Person(person.name, action.email == '' ? null : action.email, person.phone, person.status, person.id);
  return person;
 }
 
 
 Person _changeType(Person person, action) {
-  person = new Person(person.name , person.email, person.phone, person.status == '' ? null : action.name, person.id);
+  person = new Person(person.name , person.email, person.phone, action.status == '' ? null : action.name, person.id);
 
   return person;
 }

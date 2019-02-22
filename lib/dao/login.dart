@@ -26,6 +26,7 @@ class LoginDao {
 //          list.add( LoginUser(response.data['data']['token'], response.data['data']['name'],));
 //        }
         store.dispatch(new GetLoginAction(list));
+        return response.data['data'];
       }
     } catch (e) {
       return print(e);

@@ -63,8 +63,8 @@ class _AddPersonPage extends State<AddPersonPage> {
 
                 },),
                 new FlatButton(child:new Text("确定"), onPressed: (){
-                  //_saveData(controller.text.toString()+"@frogshealth.com");
-                  _saveData(_getStore().state.person.email);
+                  _saveData(controller.text.toString()+"@frogshealth.com");
+                  //_saveData(_getStore().state.person.email);
                   controller.clear();
                   Navigator.of(context).pop();
 
@@ -85,26 +85,6 @@ class _AddPersonPage extends State<AddPersonPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    //数据保存到本地
-//    void _saveData() async{
-//
-//      preferences = await SharedPreferences.getInstance();
-//
-//      list = await preferences.getStringList("todo");
-//      if(list == null){
-//        list = new List<String>();
-//      }
-//      print({'content':controller.text.toString()});
-//
-//      list.add(controller.text.toString());
-//
-//      print({'list1':list.toString()});
-//
-//      preferences.setStringList("todo", list);
-//
-//    }
-
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new Scaffold(
            appBar: new AppBar(
@@ -140,14 +120,18 @@ class _AddPersonPage extends State<AddPersonPage> {
                                controller: controller,
                                keyboardType: TextInputType.emailAddress,
                                decoration: new InputDecoration(
-                                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                                 //contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                                 contentPadding: EdgeInsets.all(8.0),
                                  border: OutlineInputBorder(
                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                  ),
-                                 hintText: '  请输入邮箱',
+                                 hintText: '请输入邮箱',
                                ),
                                //onChanged: (str) => store.dispatch(new ChangePersonEmailAction(str+"@frogshealth.com")),
-                               onChanged: (str) => store.dispatch(new ChangePersonEmailAction(str)),
+                               onChanged: (str) {
+                                 print("===onChanged===="+str);
+                                 store.dispatch(new ChangePersonEmailAction(str));
+                               } ,
                              ),
                            ),
                            new Text("@frogshealth.com",style: new TextStyle(fontSize: 16.0),

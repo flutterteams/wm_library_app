@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wm_library_app/dao/person.dart';
 import 'package:wm_library_app/reducers/add-person-reducer.dart';
 import 'package:wm_library_app/reducers/reducers.dart';
@@ -21,6 +22,9 @@ class _EditPersonPageState extends State<EditPersonPage> {
 
   TextEditingController controller = TextEditingController();
   TextEditingController typeController = TextEditingController();
+
+  SharedPreferences sharedPreferences;
+
   Store<WMState> _getStore() {
     return StoreProvider.of(context);
   }
@@ -31,7 +35,6 @@ class _EditPersonPageState extends State<EditPersonPage> {
     var result = await PersonDao.editPerson(_getStore(), id,email,type);
 
     print('保存结果：${result}');
-
     if (result['code'] == 1) {
       Navigator.pop(context);
     } else {
@@ -48,7 +51,6 @@ class _EditPersonPageState extends State<EditPersonPage> {
 
   //检测数据
   void _cheakData() {
-    print({'content':controller.text.toString()});
     if(_getStore().state.person.id != null){
       showDialog(
           context: context,
@@ -58,11 +60,9 @@ class _EditPersonPageState extends State<EditPersonPage> {
               actions:<Widget>[
                 new FlatButton(child:new Text("取消"), onPressed: (){
                   Navigator.of(context).pop();
-
                 },),
                 new FlatButton(child:new Text("确定"), onPressed: (){
-                  _saveData(_getStore().state.person.id.toString(),controller.text.toString(),_getStore().state.person.status.toString());
-                  controller.clear();
+                  _saveData(_getStore().state.person.id.toString(),_getStore().state.person.email.toString(),_getStore().state.person.status.toString());
                   Navigator.of(context).pop();
 
                 },)
@@ -114,7 +114,8 @@ class _EditPersonPageState extends State<EditPersonPage> {
                                   selection: TextSelection.fromPosition(TextPosition(
                                       affinity: TextAffinity.downstream,
                                       offset: store.state.person.email == null ? 0 : store.state.person.email.length,
-                                  ))
+                                  )
+                                  )
                               )),
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
@@ -124,7 +125,10 @@ class _EditPersonPageState extends State<EditPersonPage> {
 //                                ),
                                 hintText: '  请输入邮箱',
                               ),
-                              onChanged: (str) => store.dispatch(new ChangePersonEmailAction(str)),
+                              onChanged: (str) {
+                                print("===onChanged===="+str);
+                                store.dispatch(new ChangePersonEmailAction(str));
+                              },
                             ),
                           ),
                           //new Text("@frogshealth.com",style: new TextStyle(fontSize: 16.0),)
@@ -142,7 +146,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
                   new GestureDetector(
                     onTap: chooseType,
                     child: new Container(
-                      color: Colors.white,
+                      //color: Colors.white,
                       padding: const EdgeInsets.only(top: 0.0),
                       child:  new Row(
                         children: <Widget>[
@@ -159,22 +163,26 @@ class _EditPersonPageState extends State<EditPersonPage> {
                           new Expanded(
                             child: new TextField(
                               controller: new TextEditingController.fromValue(TextEditingValue(
-                                  text: store.state.person.status == null ? '在职' : store.state.person.status == 0 ? '在职':'离职',
+                                  text: store.state.person.status == null ? '离职' : store.state.person.status == 0 ? '在职':'离职',
                                   selection: TextSelection.fromPosition(TextPosition(
                                       affinity: TextAffinity.downstream,
                                       offset: store.state.person.status == null ? 0 : store.state.person.status == 0
                                           ? store.state.person.status.toString().length : store.state.person.status.toString().length,
-                                  ))
+                                  )
+                                  )
                               )),
-                              keyboardType: TextInputType.emailAddress,
+                              keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
 //                                border: OutlineInputBorder(
 //                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
 //                                ),
-                                hintText: '  请选择',
+                                hintText: '  请输入',
                               ),
-                              onChanged: (str) => store.dispatch(new ChangePersonTypeAction(str)),
+                              onChanged: (str) {
+                                print("===onChanged===="+str);
+                                store.dispatch(new ChangePersonTypeAction(str));
+                              },
                             ),
                           ),
                           //new Text("@frogshealth.com",style: new TextStyle(fontSize: 16.0),)
