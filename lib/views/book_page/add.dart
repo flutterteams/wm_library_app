@@ -34,6 +34,7 @@ class _AddBookPageState extends State<AddBookPage> {
             title: new Text('新增书籍'),
           ),
           body: new Container(
+            color: Colors.white,
             padding: const EdgeInsets.all(20.0),
             child: new Column(
               children: <Widget>[
@@ -176,6 +177,7 @@ class _AddBookPageState extends State<AddBookPage> {
                         new Row(
                           children: <Widget>[
                             new Container(
+//                              color: Colors.black12,
                               padding: const EdgeInsets.fromLTRB(0.0, 6.0, 26.0, 6.0),
                               child: new Text(
                                 '分类',

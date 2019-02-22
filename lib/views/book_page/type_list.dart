@@ -64,8 +64,11 @@ class _TypeListPageState extends State<TypeListPage> {
       tiles: radio,
     ).toList();
 
-    return new Column(
-      children: divided,
+    return new Container(
+      color: Colors.white,
+      child: new Column(
+        children: divided,
+      ),
     );
   }
 
