@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_library_app/model/person.dart';
 import 'package:wm_library_app/routers/routers.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -8,6 +9,7 @@ import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:wm_library_app/model/test.dart';
 import 'package:wm_library_app/model/index.dart';
 import 'package:wm_library_app/model/book.dart';
+import 'package:wm_library_app/views/login_page/login.dart';
 
 import 'package:wm_library_app/views/test_page/home.dart';
 import 'package:wm_library_app/views/index/home.dart';
@@ -30,7 +32,10 @@ class MyApp extends StatelessWidget {
       },
       bookTypeMap: new Map(),
       book: Book.empty(),
-      borrowList: new List()
+      borrowList: new List(),
+      loginUser: new List(),
+      personList: new List(),
+      person: Person.empty()
     ),
   );
 
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: new IndexHome(),
+          home: new LoginPage(),
           routes: new Routers().routers,
         )
     );
