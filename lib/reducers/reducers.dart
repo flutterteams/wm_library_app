@@ -1,11 +1,9 @@
 
 import 'package:wm_library_app/model/login_user.dart';
 import 'package:wm_library_app/model/person.dart';
-import 'package:wm_library_app/model/test.dart';
 import 'package:wm_library_app/model/index.dart';
 import 'package:wm_library_app/model/book.dart';
 import 'package:wm_library_app/model/borrow.dart';
-import 'test-reducer.dart';
 import 'index-reducer.dart';
 import 'book-reducer.dart';
 import 'book-type-reducer.dart';
@@ -16,7 +14,6 @@ import 'person-reducer.dart';
 import 'add-person-reducer.dart';
 
 class WMState {
-  Test test;
   Index index;
   Map bookMap = new Map();
   Map bookTypeMap = new Map();
@@ -28,12 +25,11 @@ class WMState {
 
 
   ///构造方法
-  WMState({this.test, this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList,this.loginUser,this.personList,this.person});
+  WMState({this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList,this.loginUser,this.personList,this.person});
 }
 
 WMState reducer(WMState state, action){
   return WMState(
-    test: TestReducer(state.test, action),
     index: IndexReducer(state.index, action),
     bookMap: BookReducer(state.bookMap, action),
     bookTypeMap: BookTypeReducer(state.bookTypeMap, action),
