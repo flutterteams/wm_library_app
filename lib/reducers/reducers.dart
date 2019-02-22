@@ -1,7 +1,9 @@
+
+import 'package:wm_library_app/model/login_user.dart';
+import 'package:wm_library_app/model/person.dart';
 import 'package:wm_library_app/model/test.dart';
 import 'package:wm_library_app/model/index.dart';
 import 'package:wm_library_app/model/book.dart';
-import 'package:wm_library_app/model/book_type.dart';
 import 'package:wm_library_app/model/borrow.dart';
 import 'test-reducer.dart';
 import 'index-reducer.dart';
@@ -9,6 +11,9 @@ import 'book-reducer.dart';
 import 'book-type-reducer.dart';
 import 'add-book-reducer.dart';
 import 'borrow-reducer.dart';
+import 'login-reducer.dart';
+import 'person-reducer.dart';
+import 'add-person-reducer.dart';
 
 class WMState {
   Test test;
@@ -17,9 +22,13 @@ class WMState {
   Map bookTypeMap = new Map();
   Book book;
   List<Borrow> borrowList;
+  List<LoginUser> loginUser = new List();
+  List<Person> personList = new List();
+  Person person;
+
 
   ///构造方法
-  WMState({this.test, this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList});
+  WMState({this.test, this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList,this.loginUser,this.personList,this.person});
 }
 
 WMState reducer(WMState state, action){
@@ -29,6 +38,9 @@ WMState reducer(WMState state, action){
     bookMap: BookReducer(state.bookMap, action),
     bookTypeMap: BookTypeReducer(state.bookTypeMap, action),
     book: AddBookReducer(state.book, action),
-    borrowList: BorrowReducer(state.borrowList, action)
+    borrowList: BorrowReducer(state.borrowList, action),
+    loginUser: LoginReducer(state.loginUser,action),
+    personList: PersonReducer(state.personList,action),
+    person: AddPersonReducer(state.person, action)
   );
 }
