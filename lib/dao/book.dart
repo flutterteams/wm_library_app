@@ -5,14 +5,18 @@ import 'package:dio/dio.dart';
 import 'package:wm_library_app/reducers/book-reducer.dart';
 import 'package:wm_library_app/model/book.dart';
 import 'package:wm_library_app/config/config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 class BookDao {
   static getList(Store<WMState> store, {page = 1, pageSize = 10}) async {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
 
-      response = await Dio().get(Config.BASE_URL + "/api/bookList", queryParameters: {"pageNo": page.toString(), "pageSize": pageSize.toString(), "bookStatus" : '0'});
+      response = await dio.get(Config.BASE_URL + "/api/bookList", queryParameters: {"pageNo": page.toString(), "pageSize": pageSize.toString(), "bookStatus" : '0'});
 //      responseGet = await dio.get("/test?id=12&name=wendu");
 //      responseGet = await dio.get("/test", queryParameters: {"id": '12', "name": "wendu"});
 //      responsePost = await dio.post("http://localhost:3000/api/user/login", data: {"email": 'shimuhui@frogshealth.com', "password": "123456"});
@@ -50,6 +54,8 @@ class BookDao {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
 
       Book book = store.state.book;
       response = await dio.post(Config.BASE_URL + "/api/admin/addbook",
@@ -73,6 +79,8 @@ class BookDao {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
 
       Book book = store.state.book;
       response = await dio.post(
@@ -98,6 +106,8 @@ class BookDao {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
       List bookList = store.state.bookMap.containsKey('list') ? store.state.bookMap['list'] : [];
 
       response = await dio.post(

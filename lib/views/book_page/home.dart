@@ -38,7 +38,6 @@ class _BookPageState extends State<BookPage> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    print('执行');
     if (_getStore().state.bookMap['page'] == 0) {
       BookDao.getList(_getStore());
       BookTypeDao.getTypeList(_getStore());
