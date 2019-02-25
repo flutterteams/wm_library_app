@@ -75,8 +75,13 @@ class _BookPageState extends State<BookPage> {
   }
 
   void edit(Book book) {
-    _getStore().dispatch(new ChangeBookAction(book));
-    Navigator.of(context).pushNamed('/add-book-page');
+    _getStore().dispatch(new ChangeBookAction(new Book.empty()));
+//    Navigator.of(context).pushNamed('/add-book-page');
+    Navigator.push<String>(context, new MaterialPageRoute(
+      builder: (BuildContext context) {
+        return new AddBookPage(id: book.id.toString());
+      },
+    ));
   }
 
   void del(int id) {

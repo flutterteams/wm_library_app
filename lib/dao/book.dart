@@ -7,7 +7,7 @@ import 'package:wm_library_app/model/book.dart';
 import 'package:wm_library_app/config/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
-import 'dart:convert';
+import 'package:wm_library_app/reducers/add-book-reducer.dart';
 
 class BookDao {
   static getList(Store<WMState> store, {page = 1, pageSize = 10}) async {
@@ -42,6 +42,27 @@ class BookDao {
         } else {
           store.dispatch(new GetBookAddListAction(list));
         }
+
+      }
+    } catch (e) {
+      return print(e);
+    }
+  }
+
+  static getId(Store<WMState> store, String id) async {
+    try {
+      Response response;
+      Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
+
+      response = await dio.get(Config.BASE_URL + "/api/bookDetails", queryParameters: {"bookId": id.toString()});
+
+      if (response.data['code'] == 1) {
+
+        List bookMap = response.data['data'];
+
+        store.dispatch(new ChangeBookAction(Book.fromJson(bookMap[0])));
 
       }
     } catch (e) {

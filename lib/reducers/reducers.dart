@@ -15,17 +15,30 @@ import 'add-person-reducer.dart';
 
 class WMState {
   Index index;
-  Map bookMap = new Map();
-  Map bookTypeMap = new Map();
+  Map bookMap;
+  Map bookTypeMap;
   Book book;
   List<Borrow> borrowList;
-  List<LoginUser> loginUser = new List();
-  List<Person> personList = new List();
+  List<LoginUser> loginUser;
+  List<Person> personList;
   Person person;
 
 
   ///构造方法
   WMState({this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList,this.loginUser,this.personList,this.person});
+
+  WMState.initState() {
+    index = new Index(0);
+    bookMap = {
+    'page': 0,
+    };
+    bookTypeMap = new Map();
+    book = Book.empty();
+    borrowList = new List();
+    loginUser = new List();
+    personList = new List();
+    person = Person.empty();
+  }
 }
 
 WMState reducer(WMState state, action){

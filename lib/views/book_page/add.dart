@@ -12,6 +12,9 @@ import 'package:flutter/cupertino.dart';
 
 class AddBookPage extends StatefulWidget {
 
+  final String id;
+  AddBookPage({this.id});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -22,6 +25,15 @@ class AddBookPage extends StatefulWidget {
 class _AddBookPageState extends State<AddBookPage> {
   Store<WMState> _getStore() {
     return StoreProvider.of(context);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (widget.id != null) {
+      BookDao.getId(_getStore(), widget.id);
+    }
   }
 
   @override

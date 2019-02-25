@@ -18,18 +18,7 @@ class MyApp extends StatelessWidget {
 
   final store = new Store<WMState>(
     reducer,
-    initialState: new WMState(
-      index: new Index(0),
-      bookMap: {
-        'page': 0,
-      },
-      bookTypeMap: new Map(),
-      book: Book.empty(),
-      borrowList: new List(),
-      loginUser: new List(),
-      personList: new List(),
-      person: Person.empty()
-    ),
+    initialState: WMState.initState(),
   );
 
   @override

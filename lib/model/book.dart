@@ -7,16 +7,24 @@ part 'book.g.dart';
 ///这个标注是告诉生成器，这个类是需要生成Model类的
 @JsonSerializable()
 
+
+
 class Book {
   Book(this.id, this.title, this.author, this.type_id, this.create_time, this.content);
 
+  @JsonKey(name: 'bookId')
   int id;
+
   String title;
   String author;
   int type_id;
   DateTime create_time;
 
   String content;
+
+  set name(String value) => title = value;
+
+
 
   // 命名构造函数
   Book.empty();
