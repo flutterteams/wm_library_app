@@ -22,24 +22,14 @@ class BorrowDao {
       if (response.data['code'] == 1) {
         List<Borrow> list = new List();
 
-        List data = response.data['data']['rows'];
+        List<dynamic> borrowMap = response.data['data']['rows'];
 
-        for (int i = 0; i < data.length; i++) {
-          DateTime create_time = DateTime.parse(data[i]['create_time']);
-          DateTime start_time = DateTime.parse(data[i]['start_time']);
-          DateTime update_time = DateTime.parse(data[i]['update_time']);
-
-          list.add(
-              Borrow(
-                  data[i]['id'],
-                  data[i]['book_name'],
-                  data[i]['user_name'],
-                  data[i]['status'],
-                  start_time,
-                  create_time,
-                  update_time
-              ));
+        if (borrowMap.length > 0) {
+          for (var item in borrowMap) {
+            list.add(Borrow.fromJson(item));
+          }
         }
+
         store.dispatch(new GetBorrowAction(list));
       }
     } catch (e) {

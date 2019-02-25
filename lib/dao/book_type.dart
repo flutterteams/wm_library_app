@@ -21,9 +21,15 @@ class BookTypeDao {
       print(response.data);
       if (response.data['code'] == 1) {
         List<BookType> list = new List();
-        for (int i = 0; i < response.data['data'].length; i++) {
-          list.add(BookType(response.data['data'][i]['id'], response.data['data'][i]['name']));
+
+        List<dynamic> bookTypeMap = response.data['data'];
+
+        if (bookTypeMap.length > 0) {
+          for (var item in bookTypeMap) {
+            list.add(BookType.fromJson(item));
+          }
         }
+
         store.dispatch(new GetBookTypeAction(list));
       }
     } catch (e) {

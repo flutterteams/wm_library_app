@@ -22,7 +22,7 @@ class _IndexHomeState extends State<IndexHome> {
     return new StoreBuilder<WMState>(builder: (context, store) {
       return new MaterialApp(
         home: new Scaffold(
-          body: store?.state?.index?.children[store?.state?.index?.currentIndex],
+          body: new Routers().children[store?.state?.index?.currentIndex],
           bottomNavigationBar: new BottomNavigationBar(
               onTap: (index) {
                 store.dispatch(new IndexAction(new Index(index)));
