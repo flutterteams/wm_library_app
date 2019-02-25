@@ -28,7 +28,8 @@ Person _changeEmail(Person person, action) {
 
 
 Person _changeType(Person person, action) {
-  person = new Person(person.name , person.email, person.phone, action.status == '' ? null : action.name, person.id);
+  print("====actionstatusss===="+action.status.toString());
+  person = new Person(person.name , person.email, person.phone, action.status, person.id);
 
   return person;
 }
@@ -39,8 +40,8 @@ class ChangePersonAction {
 }
 
 class ChangePersonTypeAction {
-  final String id;
-  ChangePersonTypeAction(this.id);
+  final int status;
+  ChangePersonTypeAction(this.status);
 }
 
 class ChangePersonEmailAction {

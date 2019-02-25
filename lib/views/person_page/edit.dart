@@ -24,6 +24,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
   TextEditingController typeController = TextEditingController();
 
   SharedPreferences sharedPreferences;
+  int _newValue = 0;
 
   Store<WMState> _getStore() {
     return StoreProvider.of(context);
@@ -83,6 +84,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
   @override
   Widget build(BuildContext context) {
     return new StoreBuilder<WMState>(builder: (context, store) {
+      print("=====status====="+store.state.person.status.toString());
       return new Scaffold(
           appBar: new AppBar(
             title: new Text('编辑员工'),
@@ -163,7 +165,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
                           new Expanded(
                             child: new TextField(
                               controller: new TextEditingController.fromValue(TextEditingValue(
-                                  text: store.state.person.status == null ? '离职' : store.state.person.status == 0 ? '在职':'离职',
+                                  text: store.state.person.status == null ? 0 : store.state.person.status == 0 ? '在职':'离职',
                                   selection: TextSelection.fromPosition(TextPosition(
                                       affinity: TextAffinity.downstream,
                                       offset: store.state.person.status == null ? 0 : store.state.person.status == 0
@@ -180,9 +182,17 @@ class _EditPersonPageState extends State<EditPersonPage> {
                                 hintText: '  请输入',
                               ),
                               onChanged: (str) {
+                                int status;
                                 print("===onChanged===="+str);
-                                store.dispatch(new ChangePersonTypeAction(str));
+                                if(str == "在职"){
+                                   status = 0;
+                                }else{
+                                   status = 1;
+                                }
+                                print("===onChangedstatus===="+status.toString());
+                                store.dispatch(new ChangePersonTypeAction(status));
                               },
+
                             ),
                           ),
                           //new Text("@frogshealth.com",style: new TextStyle(fontSize: 16.0),)

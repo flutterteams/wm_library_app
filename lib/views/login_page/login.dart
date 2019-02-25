@@ -116,11 +116,11 @@ class _LoginPageState extends State<LoginPage> {
 
 //                                  contentPadding: EdgeInsets.all(8.0),
 //                                  contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
-                                  contentPadding: const EdgeInsets.fromLTRB(6.0,10.0,0.0,10.0),
+                                  contentPadding: const EdgeInsets.fromLTRB(15.0,10.0,0.0,10.0),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                   ),
-                                  hintText: '  请输入用户名',
+                                  hintText: '请输入用户名',
                                 ),
                               ),
                             ),
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                    //child: new Text('用户名错误',style: TextStyle(),),
                   child: new Container(
                     margin: const EdgeInsets.only(left: 90.0),
-                    child:new Text('用户名错误',),
+                    //child:new Text('用户名错误',),
                   ),
                 ),
 
@@ -158,12 +158,12 @@ class _LoginPageState extends State<LoginPage> {
                           child: new TextField(
                             controller: _pwdcontroller,
                             decoration: new InputDecoration(
-                              contentPadding: const EdgeInsets.fromLTRB(6.0,10.0,0.0,10.0),
+                              contentPadding: const EdgeInsets.fromLTRB(15.0,10.0,0.0,10.0),
                               //contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
                               ),
-                              hintText: '  请输入密码',
+                              hintText: '请输入密码',
 //                              suffixIcon: new IconButton(
 //                                icon: new Icon(Icons.clear,
 //                                    color: Colors.black45),
@@ -182,13 +182,13 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerLeft,
                   //child: new Text('用户名错误',style: TextStyle(),),
                   child: new Container(
-                    margin: const EdgeInsets.fromLTRB(90.0, 5.0, 20.0, 45.0),
-                    child:new Text('密码错误',),
+                    margin: const EdgeInsets.fromLTRB(90.0, 5.0, 20.0, 95.0),
+                    //child:new Text('密码错误',),
                   ),
                 ),
 
                 new Container(
-                  width: 150.0,
+                  width: 180.0,
                   child: new Card(
                     color: Colors.blue,
                     elevation: 16.0,

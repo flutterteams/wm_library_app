@@ -5,6 +5,8 @@ import 'package:wm_library_app/model/person.dart';
 import 'package:wm_library_app/reducers/person-reducer.dart';
 import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 
 class PersonDao {
@@ -14,6 +16,8 @@ class PersonDao {
       Response response;
       Dio dio = new Dio();
 
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
       print("===1===="+map.toString());
 
 
@@ -32,7 +36,7 @@ class PersonDao {
               response.data['data'][i]['name'],
               response.data['data'][i]['email'],
               response.data['data'][i]['phone'],
-              response.data['data'][i]['company_Id'],
+              response.data['data'][i]['status'],
               response.data['data'][i]['id'])
           );
         }
@@ -68,15 +72,15 @@ class PersonDao {
       Response response;
       Dio dio = new Dio();
       Person person = store.state.person;
-      print("====person===="+person.email);
+      print("====person===="+person.status.toString());
       String user_id = person.id.toString();
       String email = person.email;
-      String status;
-      if(person.status == "在职"){
-        status = "0";
-      }else{
-        status = "1";
-      }
+      String status = person.status.toString();
+//      if(person.status == "在职"){
+//        status = "0";
+//      }else{
+//        status = "1";
+//      }
 
       print("=======user_id="+user_id+"=======email="+email+"====status="+status);
       response = await dio.post(
