@@ -144,7 +144,9 @@ class _AddPersonPage extends State<AddPersonPage> {
 
                  RaisedButton(
                    onPressed: _cheakData,
-                   child: Text("保存"),
+                   padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                   child: Text("保存",style: TextStyle(fontSize:16.0,color: Colors.white,),),
+                   color: Colors.blue,
                  ),
                ],
              ),

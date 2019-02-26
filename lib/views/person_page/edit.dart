@@ -85,6 +85,8 @@ class _EditPersonPageState extends State<EditPersonPage> {
   Widget build(BuildContext context) {
     return new StoreBuilder<WMState>(builder: (context, store) {
       print("=====status====="+store.state.person.status.toString());
+
+      _newValue = store.state.person.status == null ? 0 : store.state.person.status == 0 ? 0 : 1;
       return new Scaffold(
           appBar: new AppBar(
             title: new Text('编辑员工'),
@@ -125,7 +127,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
 //                                border: OutlineInputBorder(
 //                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
 //                                ),
-                                hintText: '  请输入邮箱',
+                                hintText: '请输入邮箱',
                               ),
                               onChanged: (str) {
                                 print("===onChanged===="+str);
@@ -141,72 +143,48 @@ class _EditPersonPageState extends State<EditPersonPage> {
                 ),
 
                 new Padding(
-                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 45.0),
-                  child: new Stack(
-                    alignment: new Alignment(1.0, 1.0),
+                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 65.0),
+                  child: new Row(
                     children: <Widget>[
-                  new GestureDetector(
-                    onTap: chooseType,
-                    child: new Container(
-                      //color: Colors.white,
-                      padding: const EdgeInsets.only(top: 0.0),
-                      child:  new Row(
-                        children: <Widget>[
-                          new Container(
-                            //padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,35.0),
-                            child: new Text(
-                              '员工状态：',
-                              style: new TextStyle(
-                                  fontSize: 16.0
-                              ),
-                            ),
-                          ),
-
-                          new Expanded(
-                            child: new TextField(
-                              controller: new TextEditingController.fromValue(TextEditingValue(
-                                  text: store.state.person.status == null ? 0 : store.state.person.status == 0 ? '在职':'离职',
-                                  selection: TextSelection.fromPosition(TextPosition(
-                                      affinity: TextAffinity.downstream,
-                                      offset: store.state.person.status == null ? 0 : store.state.person.status == 0
-                                          ? store.state.person.status.toString().length : store.state.person.status.toString().length,
-                                  )
-                                  )
-                              )),
-                              keyboardType: TextInputType.text,
-                              decoration: new InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
-//                                border: OutlineInputBorder(
-//                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-//                                ),
-                                hintText: '  请输入',
-                              ),
-                              onChanged: (str) {
-                                int status;
-                                print("===onChanged===="+str);
-                                if(str == "在职"){
-                                   status = 0;
-                                }else{
-                                   status = 1;
-                                }
-                                print("===onChangedstatus===="+status.toString());
-                                store.dispatch(new ChangePersonTypeAction(status));
-                              },
-
-                            ),
-                          ),
-                          //new Text("@frogshealth.com",style: new TextStyle(fontSize: 16.0),)
-                        ],
+                      new Container(
+                         //padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,35.0),
+                        child: new Text(
+                           '员工状态：',
+                           style: new TextStyle(
+                           fontSize: 16.0
+                           ),
+                        ),
                       ),
-                    ),
-                  ),
-
+                      Radio<int>(
+                          value: 0,
+                          groupValue: _newValue,
+                          onChanged: (value) {
+                            setState(() {
+                              _newValue = value;
+                              //print("===onChangedstatus===="+value.toString());
+                              store.dispatch(new ChangePersonTypeAction(_newValue));
+                            });
+                          }),
+                      Text('在职'),
+                      Radio<int>(
+                          value: 1,
+                          groupValue: _newValue,
+                          onChanged: (value) {
+                            setState(() {
+                              _newValue = value;
+                              //print("===onChangedstatus===="+value.toString());
+                              store.dispatch(new ChangePersonTypeAction(_newValue));
+                            });
+                          }),
+                      Text('离职'),
                     ],
                   ),
                 ),
                 RaisedButton(
                   onPressed: _cheakData,
-                  child: Text("保存"),
+                  padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                  child: Text("保存",style: TextStyle(fontSize:16.0,color: Colors.white,),),
+                  color: Colors.blue,
                 ),
               ],
             ),
@@ -215,7 +193,4 @@ class _EditPersonPageState extends State<EditPersonPage> {
     });
   }
 
-  void chooseType() {
-    //Navigator.of(context).pushNamed('/type-list-page');
-  }
 }
