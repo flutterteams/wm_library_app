@@ -6,6 +6,7 @@ final AddPersonReducer = combineReducers<Person>([
   TypedReducer<Person, ChangePersonAction>(_changeAll),
   TypedReducer<Person, ChangePersonEmailAction>(_changeEmail),
   TypedReducer<Person, ChangePersonTypeAction>(_changeType),
+
 ]);
 
 Person _changeAll(Person person, action) {
@@ -15,21 +16,20 @@ Person _changeAll(Person person, action) {
 
 Person _changePerson(Person person, action) {
   print(person.email);
-  person = new Person(
-      person.name, person.email, person.phone, person.status, person.id);
+  person = new Person(person.name, person.email, person.phone, person.status, person.id,person.company_id,person.position);
   return person;
 }
 
 Person _changeEmail(Person person, action) {
-  print("====actionname====" + action.email);
-  person = new Person(person.name, action.email == '' ? null : action.email,
-      person.phone, person.status, person.id);
-  return person;
+  print("====actionname===="+action.email);
+  person = new Person(person.name, action.email == '' ? null : action.email, person.phone, person.status, person.id,person.company_id,person.position);
+ return person;
 }
 
+
 Person _changeType(Person person, action) {
-  person = new Person(person.name, person.email, person.phone,
-      action.status == '' ? null : action.name, person.id);
+  print("====actionstatusss===="+action.status.toString());
+  person = new Person(person.name , person.email, person.phone, action.status, person.id,person.company_id,person.position);
 
   return person;
 }
@@ -40,8 +40,8 @@ class ChangePersonAction {
 }
 
 class ChangePersonTypeAction {
-  final String id;
-  ChangePersonTypeAction(this.id);
+  final int status;
+  ChangePersonTypeAction(this.status);
 }
 
 class ChangePersonEmailAction {
