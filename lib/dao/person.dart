@@ -21,7 +21,7 @@ class PersonDao {
       print("===1===="+map.toString());
 
 
-      response = await Dio().get("http://localhost:3000/api/admin/personnelList", queryParameters: map);
+      response = await dio.get("http://localhost:3000/api/admin/personnelList", queryParameters: map);
 //      responseGet = await dio.get("/test?id=12&name=wendu");
 //      responseGet = await dio.get("/test", queryParameters: {"id": '12', "name": "wendu"});
 //      responsePost = await dio.post("http://localhost:3000/api/user/login", data: {"email": 'shimuhui@frogshealth.com', "password": "123456"});
@@ -52,6 +52,9 @@ class PersonDao {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
+
       Person person = store.state.person;
       print("====person===="+email);
       response = await dio.post(
@@ -71,6 +74,10 @@ class PersonDao {
     try {
       Response response;
       Dio dio = new Dio();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
+
+
       Person person = store.state.person;
       print("====person===="+person.status.toString());
       String user_id = person.id.toString();
