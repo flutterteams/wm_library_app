@@ -123,7 +123,7 @@ class _EditPersonPageState extends State<EditPersonPage> {
                               )),
                               keyboardType: TextInputType.text,
                               decoration: new InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                                contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
 //                                border: OutlineInputBorder(
 //                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
 //                                ),
@@ -143,16 +143,75 @@ class _EditPersonPageState extends State<EditPersonPage> {
                 ),
 
                 new Padding(
-                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 65.0),
+                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 15.0),
                   child: new Row(
                     children: <Widget>[
                       new Container(
+                        child: new Text('员工姓名：', style: new TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                      new Text(store.state.person.name == null ? '测试': store.state.person.name,
+                        style: new TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                new Padding(
+                  padding: new EdgeInsets.fromLTRB(36.0, 0.0, 20.0, 15.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text('手机号：', style: new TextStyle(fontSize: 16.0),),
+                      ),
+                      new Text(store.state.person.phone == null ? '暂无': store.state.person.phone,
+                        style: new TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                ),
+
+                new Padding(
+                  padding: new EdgeInsets.fromLTRB(52.0, 0.0, 20.0, 15.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text('职务：', style: new TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                      new Text(store.state.person.position == null ? '暂无': store.state.person.position,
+                        style: new TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                ),
+
+                new Padding(
+                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 5.0),
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text('任职地点：', style: new TextStyle(fontSize: 16.0),),
+                      ),
+                      new Text(store.state.person.company_id == null ? '暂无':
+                                store.state.person.company_id == 1 ? '北京分公司':
+                                store.state.person.company_id == 2 ? '沈阳分公司':
+                                '广州总部',
+                        style: new TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                ),
+
+                new Padding(
+                  padding: new EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 65.0),
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      new Container(
                          //padding: const EdgeInsets.fromLTRB(5.0,0.0,5.0,35.0),
-                        child: new Text(
-                           '员工状态：',
-                           style: new TextStyle(
-                           fontSize: 16.0
-                           ),
+                        child: new Text('员工状态:', style: new TextStyle(fontSize: 16.0),
                         ),
                       ),
                       Radio<int>(

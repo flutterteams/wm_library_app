@@ -37,7 +37,9 @@ class PersonDao {
               response.data['data'][i]['email'],
               response.data['data'][i]['phone'],
               response.data['data'][i]['status'],
-              response.data['data'][i]['id'])
+              response.data['data'][i]['id'],
+              response.data['data'][i]['company_id'],
+              response.data['data'][i]['position'])
           );
         }
         //print("===="+list.length.toString());
