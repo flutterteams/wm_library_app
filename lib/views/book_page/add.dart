@@ -4,14 +4,12 @@ import 'package:redux/redux.dart';
 import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:wm_library_app/dao/book.dart';
 
-
 import 'package:wm_library_app/reducers/add-book-reducer.dart';
 import 'package:wm_library_app/reducers/book-reducer.dart';
 
 import 'package:flutter/cupertino.dart';
 
 class AddBookPage extends StatefulWidget {
-
   final String id;
   AddBookPage({this.id});
 
@@ -56,33 +54,33 @@ class _AddBookPageState extends State<AddBookPage> {
                       padding: const EdgeInsets.only(right: 20.0),
                       child: new Text(
                         '书名',
-                        style: new TextStyle(
-                            fontSize: 16.0
-                        ),
+                        style: new TextStyle(fontSize: 16.0),
                       ),
                     ),
                     new Expanded(
                       child: new TextField(
-                        controller: new TextEditingController.fromValue(TextEditingValue(
-                          text: store.state.book.title == null ? '' : store.state.book.title,
-                          selection: TextSelection.fromPosition(TextPosition(
-                            affinity: TextAffinity.downstream,
-                            offset: store.state.book.title == null ? 0 : store.state.book.title.length
-                          ))
-                        )),
+                        controller: new TextEditingController.fromValue(
+                            TextEditingValue(
+                                text: store.state.book.title == null
+                                    ? ''
+                                    : store.state.book.title,
+                                selection: TextSelection.fromPosition(
+                                    TextPosition(
+                                        affinity: TextAffinity.downstream,
+                                        offset: store.state.book.title == null
+                                            ? 0
+                                            : store.state.book.title.length)))),
                         decoration: new InputDecoration(
                             contentPadding: EdgeInsets.all(6.0),
                             hintText: '请输入书名',
-                            hintStyle: new TextStyle(
-                                color: Colors.black45
-                            ),
-                            border: InputBorder.none
-                        ),
+                            hintStyle: new TextStyle(color: Colors.black45),
+                            border: InputBorder.none),
                         style: new TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
                         ),
-                        onChanged: (str) => store.dispatch(new ChangeBookNameAction(str)),
+                        onChanged: (str) =>
+                            store.dispatch(new ChangeBookNameAction(str)),
                       ),
                     )
                   ],
@@ -98,33 +96,35 @@ class _AddBookPageState extends State<AddBookPage> {
                         padding: const EdgeInsets.only(right: 20.0),
                         child: new Text(
                           '作者',
-                          style: new TextStyle(
-                              fontSize: 16.0
-                          ),
+                          style: new TextStyle(fontSize: 16.0),
                         ),
                       ),
                       new Expanded(
                         child: new TextField(
-                          controller: new TextEditingController.fromValue(TextEditingValue(
-                              text: store.state.book.author == null ? '' : store.state.book.author,
-                              selection: TextSelection.fromPosition(TextPosition(
-                                  affinity: TextAffinity.downstream,
-                                  offset: store.state.book.author == null ? 0 : store.state.book.author.length
-                              ))
-                          )),
+                          controller: new TextEditingController.fromValue(
+                              TextEditingValue(
+                                  text: store.state.book.author == null
+                                      ? ''
+                                      : store.state.book.author,
+                                  selection: TextSelection.fromPosition(
+                                      TextPosition(
+                                          affinity: TextAffinity.downstream,
+                                          offset:
+                                              store.state.book.author == null
+                                                  ? 0
+                                                  : store.state.book.author
+                                                      .length)))),
                           decoration: new InputDecoration(
                               contentPadding: EdgeInsets.all(6.0),
                               hintText: '请输入作者',
-                              hintStyle: new TextStyle(
-                                color: Colors.black45
-                              ),
-                              border: InputBorder.none
-                          ),
+                              hintStyle: new TextStyle(color: Colors.black45),
+                              border: InputBorder.none),
                           style: new TextStyle(
                             fontSize: 16.0,
                             color: Colors.black,
                           ),
-                          onChanged: (str) => store.dispatch(new ChangeBookEditorAction(str)),
+                          onChanged: (str) =>
+                              store.dispatch(new ChangeBookEditorAction(str)),
                         ),
                       )
                     ],
@@ -142,34 +142,36 @@ class _AddBookPageState extends State<AddBookPage> {
                         padding: const EdgeInsets.fromLTRB(0.0, 4.0, 20.0, 0.0),
                         child: new Text(
                           '简介',
-                          style: new TextStyle(
-                              fontSize: 16.0
-                          ),
+                          style: new TextStyle(fontSize: 16.0),
                         ),
                       ),
                       new Expanded(
                         child: new TextField(
-                          controller: new TextEditingController.fromValue(TextEditingValue(
-                              text: store.state.book.content == null ? '' : store.state.book.content,
-                              selection: TextSelection.fromPosition(TextPosition(
-                                  affinity: TextAffinity.downstream,
-                                  offset: store.state.book.content == null ? 0 : store.state.book.content.length
-                              ))
-                          )),
+                          controller: new TextEditingController.fromValue(
+                              TextEditingValue(
+                                  text: store.state.book.content == null
+                                      ? ''
+                                      : store.state.book.content,
+                                  selection: TextSelection.fromPosition(
+                                      TextPosition(
+                                          affinity: TextAffinity.downstream,
+                                          offset:
+                                              store.state.book.content == null
+                                                  ? 0
+                                                  : store.state.book.content
+                                                      .length)))),
                           maxLines: 18,
                           decoration: new InputDecoration(
                               contentPadding: EdgeInsets.all(6.0),
                               hintText: '请输入简介',
-                              hintStyle: new TextStyle(
-                                  color: Colors.black45
-                              ),
-                              border: InputBorder.none
-                          ),
+                              hintStyle: new TextStyle(color: Colors.black45),
+                              border: InputBorder.none),
                           style: new TextStyle(
                             fontSize: 16.0,
                             color: Colors.black,
                           ),
-                          onChanged: (str) => store.dispatch(new ChangeBookContentAction(str)),
+                          onChanged: (str) =>
+                              store.dispatch(new ChangeBookContentAction(str)),
                         ),
                       )
                     ],
@@ -190,21 +192,23 @@ class _AddBookPageState extends State<AddBookPage> {
                           children: <Widget>[
                             new Container(
 //                              color: Colors.black12,
-                              padding: const EdgeInsets.fromLTRB(0.0, 6.0, 26.0, 6.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  0.0, 6.0, 26.0, 6.0),
                               child: new Text(
                                 '分类',
-                                style: new TextStyle(
-                                    fontSize: 16.0
-                                ),
+                                style: new TextStyle(fontSize: 16.0),
                               ),
                             ),
                             new Text(
-                              typeMap[store.state.book.type_id] == null ? '请选择分类' : typeMap[store.state.book.type_id],
-                              style: new TextStyle(
-                                fontSize: 16.0,
-                                color: typeMap[store.state.book.type_id] == null ? Colors.black45 : Colors.black
-                              )
-                            ),
+                                typeMap[store.state.book.type_id] == null
+                                    ? '请选择分类'
+                                    : typeMap[store.state.book.type_id],
+                                style: new TextStyle(
+                                    fontSize: 16.0,
+                                    color: typeMap[store.state.book.type_id] ==
+                                            null
+                                        ? Colors.black45
+                                        : Colors.black)),
                           ],
                         ),
                         new Icon(Icons.arrow_right)
@@ -218,36 +222,37 @@ class _AddBookPageState extends State<AddBookPage> {
                 new Container(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: new RaisedButton(
-                    child: new Text(
-                      '保存',
-                      style: new TextStyle(
-                        fontSize: 16.0
+                      child: new Text(
+                        '保存',
+                        style: new TextStyle(fontSize: 16.0),
                       ),
-                    ),
-                    textColor: Colors.white,
-                    padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                    textTheme: ButtonTextTheme.normal,
-                    color: Colors.blue,
-                    disabledTextColor: Colors.white,
-                    disabledColor: Colors.black12,
-                    elevation: 0.0,
-                    highlightElevation: 0.0,
-                    disabledElevation: 0.0,
-                    onPressed: store.state.book.title == null || store.state.book.author == null || store.state.book.content == null ||
-                      store.state.book.type_id == null ? null : save
-                  ),
+                      textColor: Colors.white,
+                      padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
+                      textTheme: ButtonTextTheme.normal,
+                      color: Colors.blue,
+                      disabledTextColor: Colors.white,
+                      disabledColor: Colors.black12,
+                      elevation: 0.0,
+                      highlightElevation: 0.0,
+                      disabledElevation: 0.0,
+                      onPressed: store.state.book.title == null ||
+                              store.state.book.author == null ||
+                              store.state.book.content == null ||
+                              store.state.book.type_id == null
+                          ? null
+                          : save),
                 )
               ],
             ),
-          )
-      );
+          ));
     });
   }
 
   void chooseType() {
     Navigator.of(context).pushNamed('/type-list-page');
   }
-  void save() async{
+
+  void save() async {
     var result;
     if (_getStore().state.book.id == null) {
       result = await BookDao.addBook(_getStore());
@@ -260,27 +265,25 @@ class _AddBookPageState extends State<AddBookPage> {
       Navigator.pop(context);
     } else {
       showDialog(
-        context: context,
-        builder: (context) {
-          return Center(
-            child: new Container(
-              width: 100.0,
-              height: 50.0,
-              color: Colors.black45,
-              child: new Center(
-                child: new Text(
-                  '保存失败',
-                  style: new TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.white,
-                    decoration: TextDecoration.none
+          context: context,
+          builder: (context) {
+            return Center(
+              child: new Container(
+                width: 100.0,
+                height: 50.0,
+                color: Colors.black45,
+                child: new Center(
+                  child: new Text(
+                    '保存失败',
+                    style: new TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.white,
+                        decoration: TextDecoration.none),
                   ),
                 ),
               ),
-            ),
-          );
-        }
-      );
+            );
+          });
     }
   }
 }

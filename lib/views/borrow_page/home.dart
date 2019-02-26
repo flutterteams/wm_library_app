@@ -9,7 +9,6 @@ import 'package:wm_library_app/model/borrow.dart';
 import 'package:wm_library_app/reducers/borrow-reducer.dart';
 
 class BorrowPage extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -18,7 +17,6 @@ class BorrowPage extends StatefulWidget {
 }
 
 class _BorrowPageState extends State<BorrowPage> {
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -39,13 +37,11 @@ class _BorrowPageState extends State<BorrowPage> {
           appBar: new AppBar(
             title: new Text('借阅管理'),
           ),
-          body: listView()
-      );
+          body: listView());
     });
   }
 
   Widget listView() {
-
     var list = _getStore().state.borrowList;
 
     Map statusMap = {
@@ -76,17 +72,16 @@ class _BorrowPageState extends State<BorrowPage> {
               children: <Widget>[
                 new Container(
                   child: new Text(
-                      i.book_name,
+                    i.book_name,
                     style: new TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 new Text(
                   statusMap[i.status] == null ? '' : statusMap[i.status],
                   style: new TextStyle(
-                    color: colorMap[i.status] == null ? null : colorMap[i.status],
+                    color:
+                        colorMap[i.status] == null ? null : colorMap[i.status],
                   ),
                 )
               ],
@@ -97,15 +92,9 @@ class _BorrowPageState extends State<BorrowPage> {
                   padding: EdgeInsets.only(top: 20.0),
                   child: new Row(
                     children: <Widget>[
-                      new Text(
-                          i.user_name
-                      ),
-                      new Text(
-                          ' / '
-                      ),
-                      new Text(
-                        new DateFormat('yyyy年MM月').format(i.start_time)
-                      )
+                      new Text(i.user_name),
+                      new Text(' / '),
+                      new Text(new DateFormat('yyyy年MM月').format(i.start_time))
                     ],
                   ),
                 )
@@ -115,7 +104,6 @@ class _BorrowPageState extends State<BorrowPage> {
         ),
       );
     });
-
 
     // 添加每个线
     final divided = ListTile.divideTiles(

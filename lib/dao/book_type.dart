@@ -1,4 +1,3 @@
-
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/reducers/reducers.dart';
 import 'package:dio/dio.dart';
@@ -9,13 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
 class BookTypeDao {
-
   static getTypeList(Store<WMState> store) async {
     try {
       Response response;
       Dio dio = new Dio();
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      dio.options.headers = {HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')};
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      dio.options.headers = {
+        HttpHeaders.AUTHORIZATION: 'Bearer ' + sharedPreferences.get('token')
+      };
 
       response = await dio.get(Config.BASE_URL + "/api/bookType");
       print(response.data);

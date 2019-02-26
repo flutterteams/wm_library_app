@@ -29,8 +29,7 @@ class _TypeListPageState extends State<TypeListPage> {
           appBar: new AppBar(
             title: new Text('选择分类'),
           ),
-          body: RadioGroup()
-      );
+          body: RadioGroup());
     });
   }
 
@@ -53,8 +52,7 @@ class _TypeListPageState extends State<TypeListPage> {
           value: k,
           title: Text(v),
           groupValue: _getStore().state.book.type_id,
-          onChanged: (value) => goBack(value)
-      ));
+          onChanged: (value) => goBack(value)));
     });
 
     // 添加每个线

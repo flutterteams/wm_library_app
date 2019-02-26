@@ -7,7 +7,6 @@ final AddBookReducer = combineReducers<Book>([
   TypedReducer<Book, ChangeBookNameAction>(_changeName),
   TypedReducer<Book, ChangeBookEditorAction>(_changeEditor),
   TypedReducer<Book, ChangeBookContentAction>(_changeContent),
-
 ]);
 
 Book _changeAll(Book book, action) {

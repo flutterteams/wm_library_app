@@ -1,4 +1,3 @@
-
 class Index {
   Index(this.currentIndex);
 

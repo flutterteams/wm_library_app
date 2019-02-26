@@ -1,5 +1,3 @@
-
-
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/model/person.dart';
 
@@ -16,7 +14,6 @@ List<Person> _getPersonList(List<Person> list, action) {
     return list;
   }
 }
-
 
 class GetPersonAction {
   final List<Person> list;

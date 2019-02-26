@@ -6,19 +6,17 @@ final BookTypeReducer = combineReducers<Map>([
 ]);
 
 Map _get(Map map, action) {
-
   if (action.list == null) {
     return map;
   } else {
     Map typeMap = new Map();
 
-    for(int i = 0; i < action.list.length; i++){
+    for (int i = 0; i < action.list.length; i++) {
       typeMap[action.list[i].id] = action.list[i].name;
     }
     return typeMap;
   }
 }
-
 
 class GetBookTypeAction {
   final List<BookType> list;

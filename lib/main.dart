@@ -13,9 +13,7 @@ void main() {
   runApp(new MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
-
   final store = new Store<WMState>(
     reducer,
     initialState: WMState.initState(),
@@ -25,14 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new StoreProvider(
         store: store,
-        child: new MaterialApp (
+        child: new MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
           home: new LoginPage(),
           routes: new Routers().routers,
-        )
-    );
+        ));
   }
 }

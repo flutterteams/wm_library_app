@@ -17,7 +17,6 @@ Map _get(Map map, action) {
 }
 
 Map _getAddList(Map map, action) {
-
   if (action.list == null) {
     return map;
   } else {
@@ -39,13 +38,11 @@ Map _getList(Map map, action) {
   }
 }
 
-
 class GetBookAction {
   final Map map;
 
   GetBookAction(this.map);
 }
-
 
 class GetBookListAction {
   final List<Book> list;

@@ -1,5 +1,3 @@
-
-
 import 'package:redux/redux.dart';
 import 'package:wm_library_app/model/login_user.dart';
 
@@ -16,7 +14,6 @@ List<LoginUser> _login(List<LoginUser> list, action) {
     return list;
   }
 }
-
 
 class GetLoginAction {
   final List<LoginUser> list;

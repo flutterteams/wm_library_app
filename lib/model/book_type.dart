@@ -5,7 +5,6 @@ part 'book_type.g.dart';
 
 ///这个标注是告诉生成器，这个类是需要生成Model类的
 @JsonSerializable()
-
 class BookType {
   BookType(this.id, this.name);
 
@@ -13,7 +12,7 @@ class BookType {
   String name;
 
   //不同的类使用不同的mixin即可
-  factory BookType.fromJson(Map<String, dynamic> json) => _$BookTypeFromJson(json);
+  factory BookType.fromJson(Map<String, dynamic> json) =>
+      _$BookTypeFromJson(json);
   Map<String, dynamic> toJson() => _$BookTypeToJson(this);
-
 }

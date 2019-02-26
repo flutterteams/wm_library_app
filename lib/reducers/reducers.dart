@@ -1,4 +1,3 @@
-
 import 'package:wm_library_app/model/login_user.dart';
 import 'package:wm_library_app/model/person.dart';
 import 'package:wm_library_app/model/index.dart';
@@ -23,14 +22,21 @@ class WMState {
   List<Person> personList;
   Person person;
 
-
   ///构造方法
-  WMState({this.index, this.bookMap, this.bookTypeMap, this.book, this.borrowList,this.loginUser,this.personList,this.person});
+  WMState(
+      {this.index,
+      this.bookMap,
+      this.bookTypeMap,
+      this.book,
+      this.borrowList,
+      this.loginUser,
+      this.personList,
+      this.person});
 
   WMState.initState() {
     index = new Index(0);
     bookMap = {
-    'page': 0,
+      'page': 0,
     };
     bookTypeMap = new Map();
     book = Book.empty();
@@ -41,15 +47,14 @@ class WMState {
   }
 }
 
-WMState reducer(WMState state, action){
+WMState reducer(WMState state, action) {
   return WMState(
-    index: IndexReducer(state.index, action),
-    bookMap: BookReducer(state.bookMap, action),
-    bookTypeMap: BookTypeReducer(state.bookTypeMap, action),
-    book: AddBookReducer(state.book, action),
-    borrowList: BorrowReducer(state.borrowList, action),
-    loginUser: LoginReducer(state.loginUser,action),
-    personList: PersonReducer(state.personList,action),
-    person: AddPersonReducer(state.person, action)
-  );
+      index: IndexReducer(state.index, action),
+      bookMap: BookReducer(state.bookMap, action),
+      bookTypeMap: BookTypeReducer(state.bookTypeMap, action),
+      book: AddBookReducer(state.book, action),
+      borrowList: BorrowReducer(state.borrowList, action),
+      loginUser: LoginReducer(state.loginUser, action),
+      personList: PersonReducer(state.personList, action),
+      person: AddPersonReducer(state.person, action));
 }
